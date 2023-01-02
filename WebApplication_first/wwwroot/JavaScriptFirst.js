@@ -7,7 +7,7 @@ async function login() {
 
     sessionStorage.setItem('name', nameuser);
     f = sessionStorage.getItem("name")
-
+    
     alert(f)
   
     const password = document.getElementById("pass").value;

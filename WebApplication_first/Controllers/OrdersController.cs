@@ -33,19 +33,25 @@ namespace WebApplication_first.Controllers
 
         // POST api/<OrdersController>
         [HttpPost]
-       
-        public ActionResult<Order> Post([FromBody] Order order)
+
+        //public ActionResult<Order> Post([FromBody] Order order)
+        //{
+
+
+        //    if (_IOrdersService.Post(order) != null)
+        //    {
+        //        return order;
+        //    }
+        //    return StatusCode(204);
+
+        //}
+
+        async public Task<ActionResult> Post([FromBody] Order order)
         {
 
-
-            if (_IOrdersService.Post(order) != null)
-            {
-                return order;
-            }
-            return StatusCode(204);
-
+            await _IOrdersService.AddOrder(order);
+            return Ok();
         }
-
         // PUT api/<OrdersController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

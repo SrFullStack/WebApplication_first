@@ -79,7 +79,7 @@ namespace Entitiy
                 entity.HasOne(d => d.Car)
                     .WithMany(p => p.OrderItems)
                     .HasForeignKey(d => d.CarId)
-                    .HasConstraintName("FK_ORDER_ITEM_CARS");
+                    .HasConstraintName("FK_ORDER_ITEM_PRODUCT");
 
                 entity.HasOne(d => d.Orders)
                     .WithMany(p => p.OrderItems)
@@ -93,26 +93,26 @@ namespace Entitiy
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Color)
-                    .HasMaxLength(50)
-                    .HasColumnName("color");
+                entity.Property(e => e.CategoryId).HasColumnName("category_id");
 
-                entity.Property(e => e.CompanyId).HasColumnName("companyId");
-
-                entity.Property(e => e.Image)
+                entity.Property(e => e.Description)
                     .HasMaxLength(50)
-                    .HasColumnName("image");
+                    .HasColumnName("description");
+
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(50)
+                    .HasColumnName("imageUrl");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
-                entity.Property(e => e.Size).HasColumnName("size");
-
-                entity.Property(e => e.Year).HasColumnName("year");
-
-                entity.HasOne(d => d.Company)
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.CompanyId)
-                    .HasConstraintName("FK_CARS_COMPANY_ID");
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK_category_id_PRODUCT");
             });
 
             modelBuilder.Entity<UserTable>(entity =>

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 using T_Repository;
 using Swashbuckle.AspNetCore;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -13,7 +14,12 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<UserContext>(option => option.UseSqlServer("Server=SRV2\\PUPILS;Database=User;Trusted_Connection=True;"));
+builder.Host.UseNLog();
+string ConnectionString = builder.Configuration.GetConnectionString("school");
+builder.Services.AddDbContext<UserContext>(option => option.UseSqlServer(ConnectionString));
+//builder.Services.AddDbContext<UserContext>(option => option.UseSqlServer("Server=SRV2\\PUPILS;Database=User;Trusted_Connection=True;"));
+//builder.Services.AddDbContext<UserContext>(option => option.UseSqlServer("Data Source=DESKTOP-2DTT4MQ;Initial Catalog=User2;Integrated Security=True"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

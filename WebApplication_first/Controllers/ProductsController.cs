@@ -21,9 +21,13 @@ namespace WebApplication_first.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get()
+      
+       
+
+
+            public async Task<IEnumerable<Product>> Get([FromQuery] string? name, [FromQuery] int?[] categoryIds, [FromQuery] int? minPrice, [FromQuery] int? maxPrice)
         {
-            return await _IProductsService.GetProducts();
+            return await _IProductsService.GetProducts(name, categoryIds, minPrice, maxPrice);
         }
 
 

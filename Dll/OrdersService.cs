@@ -15,16 +15,21 @@ namespace Service
         {
             _IOrderRepository = IOrderRepository;
         }
-        async public Task<Order> Post(Order order)
-        {
+        //async public Task<Order> Post(Order order)
+        //{
 
-            Order resorder = await _IOrderRepository.Post(order);
-            if (resorder != null)
-                return resorder;
-            return null;
+        //    Order resorder = await _IOrderRepository.Post(order);
+        //    if (resorder != null)
+        //        return resorder;
+        //    return null;
+
+        //}
+
+        public async Task AddOrder(Order order)
+        {
+            await _IOrderRepository.AddOrder(order);
+
 
         }
-
-
     }
 }

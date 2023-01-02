@@ -15,26 +15,35 @@ namespace WebApplication_first.Controllers
     {
        
         private readonly IUserService _IUserService;
+        private readonly ILogger<userController> _Ilogger;
 
-
-        public userController(IUserService IUserService)
+        public userController(IUserService IUserService, ILogger<userController> logger)
         {
+            _Ilogger = logger;
             _IUserService = IUserService;
         }
-       
+
         [HttpGet]
       
         // GET api/<userControler>/5
         [HttpGet("{id}")]
-      async  public Task< ActionResult<UserTable> >Get([FromQuery] string nameuser, [FromQuery] int password)
+        async public Task<ActionResult<UserTable>> Get([FromQuery] string nameuser, [FromQuery] int password)
         {
-
-            UserTable user =  await _IUserService.Get(nameuser, password);
-            if (user != null)
+            try
             {
-                return user;
+                _Ilogger.LogInformation($"enter this {nameuser} nameuser");
+                UserTable user = await _IUserService.Get(nameuser, password);
+                if (user != null)
+                {
+                    return user;
+                }
             }
-            return (NoContent());
+            catch
+                (Exception e)
+            {
+                _Ilogger.LogError(e.Message);
+            }
+            return NoContent();
 
         }
 

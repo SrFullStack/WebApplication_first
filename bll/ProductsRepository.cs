@@ -19,10 +19,25 @@ namespace T_Repository
 
         }
 
-        public async Task<IEnumerable<Product>> GetProducts()
+        //public async Task<IEnumerable<Product>> GetProducts()
+        //{
+        //    List<Product> product = await _dbContext.Products.ToListAsync();
+        //    return product;
+        //}
+        public async Task<List<Product>> GetProducts(string?name, int?[] categoryIds,int? minPrice, int? maxPrice )
         {
-            List<Product> product = await _dbContext.Products.ToListAsync();
-            return product;
+            var query = _dbContext.Products.Where(product =>
+            (name == null ? (true) : (product.Name.Contains(name)))
+            && ((minPrice == null) ? (true) : (product.Price >= minPrice))
+              && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
+&& ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
+.OrderBy(product => product.Price);
+            List<Product> products = await query.ToListAsync();
+
+
+            return products;
+
+            
         }
 
     }
