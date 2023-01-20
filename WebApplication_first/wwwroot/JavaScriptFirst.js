@@ -28,8 +28,8 @@ async function login() {
 
 async function get() {
    
-    const password = document.getElementById("password").value;
-    const nameuser = document.getElementById("nameuser").value;
+    const password = document.getElementById("passwor").value;
+    const nameuser = document.getElementById("nameuse").value;
 
     const ress = await fetch(`https://localhost:44354/api/user/?nameuser=${nameuser}&password=${password}`)
     const res1 = await ress.json();

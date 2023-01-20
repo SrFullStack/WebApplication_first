@@ -1,4 +1,12 @@
-﻿window.addEventListener("load", GetProduct());
+﻿window.addEventListener("load", (item) => {
+   
+    let pro = sessionStorage.getItem('basket')
+    if (pro) {
+        var product = JSON.parse(pro);
+    }
+    document.getElementById("ItemsCountText").innerHTML = product.length;
+    sessionStorage.setItem('basket', basket)
+}, GetProduct());
 window.addEventListener("load", GetCategory());
 
 
@@ -15,6 +23,7 @@ function ShowProducts(product) {
     var price = String(product.price);
     var tmp = document.getElementById("temp-card");
     var clon = tmp.content.cloneNode(true);
+    
     clon.querySelector("h1").innerText = product.name;
     clon.querySelector(".price").innerText =price;
     clon.querySelector(".description").innerText = product.description;
@@ -71,13 +80,23 @@ async function FilterProduct() {
 const basket = [];
  totalsum = 0;
 function ToBasket(product) {
+    //if (pro = sessionStorage.getItem('basket')) {
+    //    basket = sessionStorage.getItem('basket');
+    
+    //}
+    //else {
+    //    const basket = [];
+    //}
+
+
     basket.push(product)
-   
-    localStorage.setItem('basket', JSON.stringify(basket));
+
+
+    sessionStorage.setItem('basket', JSON.stringify(basket));
 
 
     totalsum += product.price
-    localStorage.setItem('totalsum', JSON.stringify(totalsum));
+    sessionStorage.setItem('totalsum', JSON.stringify(totalsum));
     document.getElementById("ItemsCountText").innerHTML = basket.length;
 }
 

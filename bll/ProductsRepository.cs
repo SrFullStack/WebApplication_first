@@ -19,11 +19,7 @@ namespace T_Repository
 
         }
 
-        //public async Task<IEnumerable<Product>> GetProducts()
-        //{
-        //    List<Product> product = await _dbContext.Products.ToListAsync();
-        //    return product;
-        //}
+      
         public async Task<List<Product>> GetProducts(string?name, int?[] categoryIds,int? minPrice, int? maxPrice )
         {
             var query = _dbContext.Products.Where(product =>
@@ -31,7 +27,7 @@ namespace T_Repository
             && ((minPrice == null) ? (true) : (product.Price >= minPrice))
               && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
 && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
-.OrderBy(product => product.Price);
+.OrderBy(product => product.Price).Include(p=>p.Category);
             List<Product> products = await query.ToListAsync();
 
 
