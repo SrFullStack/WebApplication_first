@@ -34,6 +34,7 @@ namespace WebApplication_first.Controllers
         {
             //int a= 0;
             //int b = 5 / a;
+            //
              
                 UserTable user = await _IUserService.Get(nameuser, password);
                 if (user != null)
