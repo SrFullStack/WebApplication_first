@@ -45,7 +45,7 @@ namespace WebApplication_first
                 sqlCommand.Parameters.Add("@PATH", SqlDbType.NChar);
                 sqlCommand.Parameters["@PATH"].Value = PATH;
 
-
+                //
                 //sqlCommand.Parameters.Add("@Record_Date", SqlDbType.NChar);
                 //sqlCommand.Parameters["@Record_Date"].Value = Record_Date;
 
