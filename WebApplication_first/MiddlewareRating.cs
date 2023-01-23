@@ -51,7 +51,7 @@ namespace WebApplication_first
 
                 sqlConnection.Open();
                 int result = sqlCommand.ExecuteNonQuery();
-
+                
             }
             return _next(httpContext);
         }
