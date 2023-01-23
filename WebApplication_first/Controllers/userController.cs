@@ -27,7 +27,7 @@ namespace WebApplication_first.Controllers
         }
 
         [HttpGet]
-      
+      //
         // GET api/<userControler>/5
         [HttpGet("{id}")]
         async public Task<ActionResult<UserDTO>> Get([FromQuery] string nameuser, [FromQuery] int password)
