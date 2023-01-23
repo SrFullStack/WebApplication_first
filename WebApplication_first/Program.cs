@@ -29,7 +29,7 @@ builder.Services.AddDbContext<UserContext>(option => option.UseSqlServer(Connect
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+//
 
 var app = builder.Build();
 app.UseMiddlewareError();
