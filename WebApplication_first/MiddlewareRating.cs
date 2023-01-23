@@ -53,6 +53,7 @@ namespace WebApplication_first
                 int result = sqlCommand.ExecuteNonQuery();
                 
             }
+            //
             return _next(httpContext);
         }
     }
